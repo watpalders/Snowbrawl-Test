@@ -12,8 +12,8 @@ public class ThirdPersonController : MonoBehaviour
     ThirdPersonController controller;
     TPGunController gunController;
     float snowballChargeTimer = 0;
-    public float muzzlePower = 0f;
-    [SerializeField] float powerRatio = 4000f;
+    public float muzzlePower = 1500f;
+    public float powerRatio = 1800f;
     public float moveSpeed = 7;
 
     void Start()
@@ -69,14 +69,22 @@ public class ThirdPersonController : MonoBehaviour
             //StopMoving();
             snowballChargeTimer += Time.deltaTime;
             muzzlePower = snowballChargeTimer * powerRatio;
+            if(muzzlePower >= 3300)
+            {
+                muzzlePower = 3300;
+            }
+            if(muzzlePower <= 1500)
+            {
+                muzzlePower = 1500;
+            }
+           
+            // todo Max Range = 1 = 2800 , Min Range = .4 = 1500 , 
         }
         if (Input.GetMouseButtonDown(0))
         {
             snowballChargeTimer = 0;
         }
-
     }
-
 
     private void StartMoving()
     {

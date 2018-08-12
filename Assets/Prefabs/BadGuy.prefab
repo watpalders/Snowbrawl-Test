@@ -82,13 +82,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1575300871016742}
-  m_LocalRotation: {x: 0.674363, y: -0.008229327, z: 0.0068196435, w: 0.7383226}
-  m_LocalPosition: {x: 0.83, y: 0.97, z: -0.116}
+  m_LocalRotation: {x: 0.61266917, y: -0.0087521365, z: 0.006134235, w: 0.7902672}
+  m_LocalPosition: {x: 0.8299993, y: 0.9700002, z: -0.11600578}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4527440757465726}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 84.814, y: -1.8730001, z: -0.652}
+  m_LocalEulerAnglesHint: {x: 75.57001, y: -1.452, z: -0.23700002}
 --- !u!4 &4527440757465726
 Transform:
   m_ObjectHideFlags: 1
@@ -96,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1129421339859678}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 5.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4308057933819390}
@@ -193,11 +193,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hat: {fileID: 4870628993588900, guid: 1d991823729dda24ca1ec5c0b51c153c, type: 2}
   hatRack: {fileID: 4308057933819390}
-  targets: []
+  targets:
+  - {fileID: 0}
   selectedTarget: {fileID: 0}
   deathParticle: {fileID: 198381632211147076, guid: 916b0e5d48347f842a1a2e46b0127402,
     type: 2}
-  me: {fileID: 4527440757465726}
 --- !u!114 &114916796571690668
 MonoBehaviour:
   m_ObjectHideFlags: 1
