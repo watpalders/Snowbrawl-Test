@@ -115,6 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  deathBall: {fileID: 4313721335295392, guid: 962b76df275adc34b8fbf142a967fc1d, type: 2}
   _psystem: {fileID: 198724296002684646, guid: 8ed86188af9883c45bd89c481386260d, type: 2}
 --- !u!135 &135383408934658370
 SphereCollider:
