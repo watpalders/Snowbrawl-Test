@@ -11,9 +11,8 @@ public class ThirdPersonController : MonoBehaviour
     Camera viewCamera;
     ThirdPersonController controller;
     TPGunController gunController;
-    float launchAngle = 0;
-    public float muzzlePower = 1500f;
-    public float powerRatio = 1800f;
+    public float launchAngle;
+    public float powerRatio = 12f;
     public float moveSpeed = 7;
 
     void Start()
@@ -47,7 +46,6 @@ public class ThirdPersonController : MonoBehaviour
         {
             StartMoving();
             LookAtMouse();
-            // weapon input
             SetMuzzlePower();
             if (Input.GetMouseButtonUp(0))
             {
@@ -62,27 +60,25 @@ public class ThirdPersonController : MonoBehaviour
 
     }
 
-    void SetMuzzlePower()
+    public void SetMuzzlePower()
     {
+
         if (Input.GetMouseButton(0))
         {
             //StopMoving();
-            launchAngle += Time.deltaTime;
-            muzzlePower = launchAngle * powerRatio;
-            if(muzzlePower >= 3300)
+            launchAngle -= Time.deltaTime * powerRatio;
+            if (launchAngle >= 70)
             {
-                muzzlePower = 3300;
+                launchAngle = 70;
             }
-            if(muzzlePower <= 1500)
+            if (launchAngle <= 10)
             {
-                muzzlePower = 1500;
+                launchAngle = 10;
             }
-           
-            // todo Max Range = 1 = 2800 , Min Range = .4 = 1500 , 
         }
         if (Input.GetMouseButtonDown(0))
         {
-            launchAngle = 0;
+            launchAngle = 70f;
         }
     }
 

@@ -9,7 +9,6 @@ public class ThirdPersonGun : MonoBehaviour
     public Transform muzzle;
     public Projectile projectile;
     public float msBetweenShots = 1000f;
-    float snowballVelocity;
     float nextShotTime;
 
     
@@ -24,11 +23,8 @@ public class ThirdPersonGun : MonoBehaviour
         {
             if (Time.time > nextShotTime)
             {
-                snowballVelocity = 2000f; //set based on player location
-                print(snowballVelocity);
                 nextShotTime = Time.time + msBetweenShots / 1000;
                 Projectile newProjectile = Instantiate(projectile, muzzle.position, muzzle.rotation) as Projectile;
-                newProjectile.SetSpeed(snowballVelocity);
             }
         }
     }
@@ -38,7 +34,6 @@ public class ThirdPersonGun : MonoBehaviour
         {            
             if (Time.time > nextShotTime)
             {
-                print(snowballVelocity);
                 nextShotTime = Time.time + msBetweenShots / 1000;
                 Projectile newProjectile = Instantiate(projectile, muzzle.position, muzzle.rotation) as Projectile;
             }

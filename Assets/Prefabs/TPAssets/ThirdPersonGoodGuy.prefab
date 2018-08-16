@@ -168,8 +168,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1334080653189014}
-  m_LocalRotation: {x: -0.02975892, y: -0.007359505, z: -0.00021911414, w: 0.99953}
-  m_LocalPosition: {x: 0.83, y: -0.005, z: -0.116}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.83, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4239948505824142}
@@ -508,8 +508,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea098c516e88aa244835cf05d2439724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  muzzlePower: 1500
-  powerRatio: 2800
+  launchAngle: 0
+  powerRatio: 30
   moveSpeed: 7
 --- !u!114 &114650498781745688
 MonoBehaviour:

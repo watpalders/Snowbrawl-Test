@@ -69,7 +69,7 @@ Transform:
   m_GameObject: {fileID: 1629791406397788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.33, y: 0.33, z: 0.33}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 4077192771919906}
   m_Father: {fileID: 0}
@@ -84,7 +84,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -130,7 +130,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 2
 --- !u!114 &114462832354175942
 MonoBehaviour:
@@ -143,11 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1357b4418c07b24c889fe4dbca53337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mousePosition: {x: 0, y: 0, z: 0}
   clickLight: {fileID: 100002, guid: 21543d2b66928224f8a9536ff3811682, type: 2}
-  TargetRadius: 7087
-  LaunchAngle: 34.7
-  speed: 10
+  TargetRadius: 300
   deathBall: {fileID: 4313721335295392, guid: 962b76df275adc34b8fbf142a967fc1d, type: 2}
   _psystem: {fileID: 198125078595459528}
 --- !u!135 &135804616917686750

@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
-    [SerializeField] private Vector3 enemyPosition;    // target transform
+    private Vector3 enemyPosition;
     public GameObject clickLight;
     [Range(30.0f, 500.0f)] public float TargetRadius;
     [Range(20.0f, 70.0f)] public float LaunchAngle;
 
-    [SerializeField] public float speed = 10f;
     Rigidbody rb;
     public Transform deathBall;
     public ParticleSystem _psystem;
@@ -17,13 +16,10 @@ public class EnemyProjectile : MonoBehaviour
 
     private void Start()  // Basically Launch
     {
-
         GetEnemyPos();
-        rb = GetComponent<Rigidbody>();
         Launch();
         GameObject light = (GameObject)Instantiate(clickLight, new Vector3(enemyPosition.x, 5+ enemyPosition.y, enemyPosition.z), Quaternion.Euler(90f,0f,0f));
         Destroy(light, 1.5f);
-        //  rb.AddForce(transform.up * speed);
     }
 
     private void GetEnemyPos() // THIS IS CORRECT!!!
@@ -35,11 +31,11 @@ public class EnemyProjectile : MonoBehaviour
 
     private void Launch()
     {
-
+        rb = GetComponent<Rigidbody>();
         // think of it as top-down view of vectors: 
         //   we don't care about the y-component(height) of the initial and target position.
-        Vector3 projectileXZPos = new Vector3(transform.position.x, 0.0f, transform.position.z);
-        Vector3 targetXZPos = new Vector3(enemyPosition.x, 0.0f, enemyPosition.z);
+        Vector3 projectileXZPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        Vector3 targetXZPos = new Vector3(enemyPosition.x, enemyPosition.y, enemyPosition.z);
 
         // shorthands for the formula
         float R = Vector3.Distance(projectileXZPos, targetXZPos);
@@ -67,11 +63,4 @@ public class EnemyProjectile : MonoBehaviour
         Transform newDeathBall = Instantiate(deathBall, transform.position, transform.rotation, contact.otherCollider.transform) as Transform;
         ParticleSystem newBallDeathParticle = Instantiate(_psystem, transform.position, transform.rotation) as ParticleSystem;
     }
-
-
-    public void SetSpeed(float newSpeed)
-    {
-        speed = newSpeed;
-    }
-
 }
