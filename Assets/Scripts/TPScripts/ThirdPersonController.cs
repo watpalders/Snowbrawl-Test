@@ -11,7 +11,7 @@ public class ThirdPersonController : MonoBehaviour
     Camera viewCamera;
     ThirdPersonController controller;
     TPGunController gunController;
-    float snowballChargeTimer = 0;
+    float launchAngle = 0;
     public float muzzlePower = 1500f;
     public float powerRatio = 1800f;
     public float moveSpeed = 7;
@@ -67,8 +67,8 @@ public class ThirdPersonController : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             //StopMoving();
-            snowballChargeTimer += Time.deltaTime;
-            muzzlePower = snowballChargeTimer * powerRatio;
+            launchAngle += Time.deltaTime;
+            muzzlePower = launchAngle * powerRatio;
             if(muzzlePower >= 3300)
             {
                 muzzlePower = 3300;
@@ -82,7 +82,7 @@ public class ThirdPersonController : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0))
         {
-            snowballChargeTimer = 0;
+            launchAngle = 0;
         }
     }
 

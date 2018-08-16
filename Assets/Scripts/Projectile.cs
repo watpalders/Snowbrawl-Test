@@ -7,6 +7,9 @@ public class Projectile : MonoBehaviour
     [SerializeField] private Vector3 mousePosition;    // target transform
     public GameObject clickLight;
     [Range(30.0f, 500.0f)] public float TargetRadius;
+    float launchAngle;
+    float muzzlePower = 0f;
+    public float powerRatio = 1f;
     [Range(20.0f, 70.0f)] public float LaunchAngle;
 
     [SerializeField] public float speed = 10f;
@@ -20,14 +23,41 @@ public class Projectile : MonoBehaviour
 
         GetMousePos();
         LookAtMouse();
-        print(mousePosition); // yay
         rb = GetComponent<Rigidbody>();
+        SetMuzzlePower();
         Launch();
         GameObject light = (GameObject)Instantiate(clickLight, new Vector3(mousePosition.x, 5+ mousePosition.y, mousePosition.z), Quaternion.Euler(90f,0f,0f));
         Destroy(light, 1.5f);
         //  rb.AddForce(transform.up * speed);
     }
 
+    private void SetMuzzlePower()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            muzzlePower = 20f;
+        }
+        if (Input.GetMouseButton(0))
+        {
+            //StopMoving();
+            launchAngle += Time.deltaTime;
+            Debug.Log(launchAngle);
+            muzzlePower = launchAngle * powerRatio;
+            Debug.Log(muzzlePower);
+            LaunchAngle = LaunchAngle + muzzlePower;
+            Debug.Log(LaunchAngle);
+            //if (muzzlePower >= 3300)
+            //{
+            //    muzzlePower = 3300;
+            //}
+            //if (muzzlePower <= 1500)
+            //{
+            //    muzzlePower = 1500;
+            //}
+
+            // todo Max Range = 1 = 2800 , Min Range = .4 = 1500 , 
+        }
+    }
     void LookAtMouse()
     {
 

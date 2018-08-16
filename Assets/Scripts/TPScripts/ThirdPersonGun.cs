@@ -38,11 +38,9 @@ public class ThirdPersonGun : MonoBehaviour
         {            
             if (Time.time > nextShotTime)
             {
-                snowballVelocity = transform.parent.parent.gameObject.GetComponent<ThirdPersonController>().muzzlePower;
                 print(snowballVelocity);
                 nextShotTime = Time.time + msBetweenShots / 1000;
                 Projectile newProjectile = Instantiate(projectile, muzzle.position, muzzle.rotation) as Projectile;
-                newProjectile.SetSpeed(snowballVelocity);
             }
         }
     }
