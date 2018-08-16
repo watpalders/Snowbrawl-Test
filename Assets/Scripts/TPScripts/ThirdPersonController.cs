@@ -93,17 +93,14 @@ public class ThirdPersonController : MonoBehaviour
         controller.Move(moveVelocity);
     }
 
-    private void LookAtMouse()
+    public void LookAtMouse()
     {
-        Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-        float rayDistance;
-        if (groundPlane.Raycast(ray, out rayDistance))
-        {
-            Vector3 point = ray.GetPoint(rayDistance);
-            //Debug.DrawLine(ray.origin, point, Color.red);
-            controller.LookAt(point);
-        }
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, 1000))
+            {
+                controller.LookAt(hit.point);
+            }
     }
 
     private void StopMoving()

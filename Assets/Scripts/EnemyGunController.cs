@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class EnemyGunController : MonoBehaviour
 {
-    [SerializeField] private Vector3 mousePosition;    // target transform
+
+    [SerializeField] private Vector3 enemyPosition;    // target transform
     public GameObject clickLight;
-    [Range(30.0f, 500.0f)] public float TargetRadius;
+    [Range(1.0f, 300.0f)] public float TargetRadius;
     [Range(20.0f, 70.0f)] public float LaunchAngle;
 
     [SerializeField] public float speed = 10f;
@@ -14,41 +15,31 @@ public class Projectile : MonoBehaviour
     public Transform deathBall;
     public ParticleSystem _psystem;
 
+    //old gun controller
+    public Transform weaponHold;
+    public Gun startingGun;
+    Gun equippedGun;
+
 
     private void Start()  // Basically Launch
     {
-
-        GetMousePos();
-        LookAtMouse();
-        print(mousePosition); // yay
+        if (startingGun != null)
+        {
+            EquipGun(startingGun);
+        }
+        GetEnemyPos(); // get from Target File
+        print(enemyPosition); // yay
         rb = GetComponent<Rigidbody>();
         Launch();
-        GameObject light = (GameObject)Instantiate(clickLight, new Vector3(mousePosition.x, 5+ mousePosition.y, mousePosition.z), Quaternion.Euler(90f,0f,0f));
-        Destroy(light, 1.5f);
+        GameObject light = (GameObject)Instantiate(clickLight, new Vector3(enemyPosition.x, 5 + enemyPosition.y, enemyPosition.z), Quaternion.Euler(90f, 0f, 0f));
+        Destroy(light, 1.5f);   
         //  rb.AddForce(transform.up * speed);
     }
 
-    void LookAtMouse()
+    private void GetEnemyPos()
     {
-
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, 1000))
-        {
-            transform.LookAt(hit.point);
-        }
-    }
-    private void GetMousePos() // THIS IS CORRECT!!!
-    {
-        if (Input.GetMouseButtonUp(0))
-        {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, 1000))
-            {
-                mousePosition = hit.point;
-            }
-        }           
+                EnemyBehavior enemyBehavior = GetComponent<EnemyBehavior>();
+        enemyPosition = enemyBehavior.selectedTarget.transform.position;
     }
 
     private void Launch()
@@ -57,13 +48,13 @@ public class Projectile : MonoBehaviour
         // think of it as top-down view of vectors: 
         //   we don't care about the y-component(height) of the initial and target position.
         Vector3 projectileXZPos = new Vector3(transform.position.x, 0.0f, transform.position.z);
-        Vector3 targetXZPos = new Vector3(mousePosition.x, 0.0f, mousePosition.z);
+        Vector3 targetXZPos = new Vector3(enemyPosition.x, 0.0f, enemyPosition.z);
 
         // shorthands for the formula
         float R = Vector3.Distance(projectileXZPos, targetXZPos);
         float G = Physics.gravity.y;
         float tanAlpha = Mathf.Tan(LaunchAngle * Mathf.Deg2Rad);
-        float H = mousePosition.y - transform.position.y;
+        float H = enemyPosition.y - transform.position.y;
 
         // calculate the local space components of the velocity 
         // required to land the projectile on the target object 
@@ -91,5 +82,21 @@ public class Projectile : MonoBehaviour
     {
         speed = newSpeed;
     }
+    public void EquipGun(Gun gunToEquip)
+    {
+        if (equippedGun != null)
+        {
+            Destroy(equippedGun.gameObject);
+        }
 
+        equippedGun = Instantiate(gunToEquip, weaponHold.position, weaponHold.rotation) as Gun;
+        equippedGun.transform.parent = weaponHold;
+    }
+    public void Shoot()
+    {
+        if (equippedGun != null)
+        {
+            equippedGun.Shoot();
+        }
+    }
 }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8bc7f6ea2e7e15e49bbc53a540e36f82
+guid: fcb6e6621627ba34ba8467e29341b789
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -11,17 +11,22 @@ ModelImporter:
     400002: Cone
     400004: //RootNode
     400006: TopHat
-    2100000: Red
-    2100002: White
+    2100000: White_001
+    2100002: Red_001
     2300000: BottomHat
     2300002: Cone
     2300004: TopHat
     3300000: BottomHat
     3300002: Cone
     3300004: TopHat
-    4300000: Cone
+    4300000: BottomHat
     4300002: TopHat
-    4300004: BottomHat
+    4300004: Cone
+    6400000: BottomHat
+    6400002: Cone
+    6400004: TopHat
+    7400000: Default Take
+    9500000: //RootNode
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -55,7 +60,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -74,7 +79,7 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
     previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -99,7 +104,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

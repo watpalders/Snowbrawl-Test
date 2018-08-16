@@ -126,9 +126,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   muzzle: {fileID: 4418937787857502}
-  projectile: {fileID: 114446950228098910, guid: 33b783396a886974f8a38a10ab133398,
+  projectile: {fileID: 114462832354175942, guid: c70eb60e506ee054b821794c8b1f251a,
+    type: 2}
+  enemyProjectile: {fileID: 114561779379337974, guid: 33b783396a886974f8a38a10ab133398,
     type: 2}
   msBetweenShots: 1000
+  mousePoint: {x: 0, y: 0, z: 0}
 --- !u!136 &136910922453140692
 CapsuleCollider:
   m_ObjectHideFlags: 1
