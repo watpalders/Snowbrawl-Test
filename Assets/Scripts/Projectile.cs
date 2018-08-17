@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     public GameObject clickLight;
     [Range(10.0f, 500.0f)] public float TargetRadius;
     float LaunchAngle;
+    float launchPower;
 
     Rigidbody rb;
     public Transform deathBall;
@@ -50,7 +51,7 @@ public class Projectile : MonoBehaviour
         // think of it as top-down view of vectors: 
         //   we don't care about the y-component(height) of the initial and target position.
         Vector3 projectileXZPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        Vector3 targetXZPos = new Vector3(mousePosition.x, transform.position.y, mousePosition.z);
+        Vector3 targetXZPos = new Vector3(mousePosition.x, mousePosition.y, mousePosition.z);
 
         // shorthands for the formula
         float R = Vector3.Distance(projectileXZPos, targetXZPos);
@@ -64,7 +65,9 @@ public class Projectile : MonoBehaviour
         float Vy = tanAlpha * Vz;
 
         // create the velocity vector in local space and get it in global space
-        Vector3 localVelocity = new Vector3(0f, Vy, Vz);
+        launchPower = tpc.launchPower;
+        Vector3 localVelocity = new Vector3(0f, Vy, launchPower + Vz);
+        print(launchPower);
         Vector3 globalVelocity = transform.TransformDirection(localVelocity);
 
         // launch the object by setting its initial velocity and flipping its state

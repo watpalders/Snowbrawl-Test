@@ -15,7 +15,7 @@ public class EnemyBehavior : MonoBehaviour {
     private void Awake ()
     {
         
-        newHat = Instantiate(hat,hatRack.position , Quaternion.identity);
+        newHat = Instantiate(hat,hatRack.position , hatRack.rotation);
         
     }
     void Start()

@@ -12,7 +12,11 @@ public class ThirdPersonController : MonoBehaviour
     ThirdPersonController controller;
     TPGunController gunController;
     public float launchAngle;
-    public float powerRatio = 12f;
+    public float launchPower;
+    public float maxPower = 200f;
+    public float powerRatio = 1f;
+    float launchPlaceholder;
+    public float angleRatio = 30f;
     public float moveSpeed = 7;
 
     void Start()
@@ -46,7 +50,8 @@ public class ThirdPersonController : MonoBehaviour
         {
             StartMoving();
             LookAtMouse();
-            SetMuzzlePower();
+            SetLaunchAngle();
+            SetLaunchPower();
             if (Input.GetMouseButtonUp(0))
             {
                 gunController.Shoot();
@@ -59,17 +64,42 @@ public class ThirdPersonController : MonoBehaviour
         }
 
     }
+    public void SetLaunchPower()
+    {
+        if (Input.GetMouseButton(0))
+        {
 
-    public void SetMuzzlePower()
+            //StopMoving();
+            launchPlaceholder += Time.deltaTime * powerRatio;
+
+            if (launchPlaceholder <= 0)
+            {
+                launchPower = 0;
+            }
+            else if (launchPlaceholder > 100)
+            {
+                launchPower = 100;
+            }
+            else
+            {
+                launchPower = launchPlaceholder;
+            }
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            launchPlaceholder = -20f;
+        }
+    }
+    public void SetLaunchAngle()
     {
 
         if (Input.GetMouseButton(0))
         {
             //StopMoving();
-            launchAngle -= Time.deltaTime * powerRatio;
-            if (launchAngle >= 70)
+            launchAngle -= Time.deltaTime * angleRatio;
+            if (launchAngle >= 50)
             {
-                launchAngle = 70;
+                launchAngle = 50;
             }
             if (launchAngle <= 10)
             {
