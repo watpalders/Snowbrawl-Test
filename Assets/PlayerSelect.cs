@@ -1,0 +1,257 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using System.Linq;
+using UnityEngine.EventSystems;
+
+public class PlayerSelect : MonoBehaviour
+{
+
+    public List<GameObject> playersAvailable;
+    public GameObject selectedPlayer;
+    public int listSize;
+    private MobileController mobileController;
+    public float angleRatio = 30f;
+    public float startingLaunchAngle = 50f;
+    public float launchAngleMin = 10f;
+    public float launchAngle;
+    public float launchPlaceholder = 1f;
+    private bool bustedShootMeter = false;
+
+    public GameObject snowBank;
+    public Transform enemyPos;
+    private float downTime;
+    public float lapActual;
+    public float launchPowerDecrease = .1f;
+    public Image powerBar;
+    public Image buildBank;
+    public float timeForBuildBank = 2f;
+    int throwMask;
+    public bool buildButtonDown = false;
+    private float buttonDownTimer;
+    private bool isThrowDown = false;
+    public Image healthBar;
+    private bool canBuildBank = false;
+
+    void Start()
+    {
+        throwMask = LayerMask.GetMask("ThrowableArea");
+        playersAvailable = new List<GameObject>();
+        playersAvailable.RemoveAll(item => item == null);
+        AddAllAvailable();
+        Input.simulateMouseWithTouches = false;
+    }
+
+    private void Update()
+    {
+        SetLaunchByMouse();
+        SetLaunchByTouch();
+        powerBar.fillAmount = launchPlaceholder;
+         //   (StartingAngle - (Starting Angle - Lowest Angle)*METER) +Lowest Angle
+         launchAngle = (startingLaunchAngle - (startingLaunchAngle - launchAngleMin) * lapActual);
+        playersAvailable.RemoveAll(item => item == null);
+        listSize = playersAvailable.Count;
+        IsBuildButtonDown();
+        SelectNewPlayer();
+        healthBar.fillAmount = mobileController.playerCurrentHealth/mobileController.playerStartHealth;
+
+
+    }
+    public void AddAllAvailable()
+    {
+        GameObject[] gobj = GameObject.FindGameObjectsWithTag("Player").OrderBy(go => go.name).ToArray();
+        foreach (GameObject goodGuy in gobj)
+        {
+            AddTarget(goodGuy.gameObject);
+        }
+    }
+    public void AddTarget(GameObject goodGuy)
+    {
+        if (playersAvailable.IndexOf(goodGuy) < 0)
+        {
+            playersAvailable.Add(goodGuy);
+        }
+    }
+
+
+    private void SelectNewPlayer()
+    {
+        if (listSize > 0)
+        {
+            selectedPlayer = playersAvailable[0];
+            mobileController = selectedPlayer.GetComponent<MobileController>();
+            mobileController.enabled = true;
+            mobileController.isSelected = true;
+        }
+    }
+
+    //public void SnowBankButtonUp()
+    //{
+    //    float heldTime = Time.time - downTime;
+    //    if(heldTime > timeForBuildBank) // seconds
+    //    {
+    //        GameObject newSnowBank = Instantiate(snowBank, new Vector3(selectedPlayer.transform.position.x-5f, selectedPlayer.transform.position.y-1.5f, selectedPlayer.transform.position.z), 
+    //        Quaternion.LookRotation(enemyPos.position - selectedPlayer.transform.position)) as GameObject;
+    //        newSnowBank.transform.Rotate(-90f,180f,0f);
+    //    }
+    //    buildButtonDown = false;
+    //    buttonDownTimer = 0f;
+    //}
+    public void SnowBankButtonDown()
+    {
+        if (canBuildBank)
+        {
+            GameObject newSnowBank = Instantiate(snowBank, new Vector3(selectedPlayer.transform.position.x - 5f, selectedPlayer.transform.position.y - 1.5f, selectedPlayer.transform.position.z),
+            Quaternion.LookRotation(enemyPos.position - selectedPlayer.transform.position)) as GameObject;
+            newSnowBank.transform.Rotate(-90f, 180f, 0f);
+            buttonDownTimer = 0f;
+            canBuildBank = false;
+        }
+    }
+
+    public void IsBuildButtonDown()
+    {
+        buildBank.fillAmount = buttonDownTimer / timeForBuildBank;
+        buttonDownTimer += Time.deltaTime;
+        if(buttonDownTimer >= timeForBuildBank)
+        {
+            buttonDownTimer = timeForBuildBank;
+            canBuildBank = true;
+        }
+
+ //       else
+
+ //       buildButtonDown = false;
+    }
+    //private void SetLaunchByMouse()
+    //{
+    //    if (!IsPointerOverUIObject() && !PauseMenu.gameIsPaused)
+    //    {
+    //        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    //        RaycastHit hit;
+
+    //        if (Physics.Raycast(ray, out hit, Mathf.Infinity, throwMask))
+    //        {
+    //            if (Input.GetMouseButton(0) && !bustedShootMeter)
+    //            {
+    //                isThrowDown = true;
+    //                launchPlaceholder += Time.deltaTime * angleRatio;
+    //                lapActual = launchPlaceholder;
+
+    //                if (launchPlaceholder >= 1)
+    //                {
+    //                    bustedShootMeter = true;
+    //                    //launchPlaceholder = 0;
+    //                    lapActual = 0;
+    //                }
+    //            }
+    //            if (Input.GetMouseButtonUp(0))
+    //            {
+    //                isThrowDown = false;    
+    //            }
+    //        }
+    //        if (Input.GetMouseButtonUp(0))
+    //        {
+    //            isThrowDown = false;
+    //        }
+    //        if (!isThrowDown)
+    //        {
+    //            launchPlaceholder -= Time.deltaTime * 1.5f *angleRatio;
+    //            if (launchPlaceholder <= 0)
+    //            {
+    //                bustedShootMeter = false;
+    //                launchPlaceholder = 0;
+    //            }
+    //        }
+    //    }
+    //}
+
+    private void SetLaunchByMouse()
+    {
+        if (!IsPointerOverUIObject() && !PauseMenu.gameIsPaused)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, throwMask))
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    launchPlaceholder -= launchPowerDecrease;
+                    lapActual = launchPlaceholder;
+                }
+            }
+        }
+        launchPlaceholder += Time.deltaTime * angleRatio;
+        if(launchPlaceholder >= 1f)
+        {
+            launchPlaceholder = 1f;
+        }
+        if(launchPlaceholder <= 0f)
+        {
+            launchPlaceholder = 0f;
+        }
+    }
+    private void SetLaunchByTouch()
+    {
+        if (!IsPointerOverUIObject() && !PauseMenu.gameIsPaused)
+        {
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+                Ray touchray = Camera.main.ScreenPointToRay(Input.touches[i].position);
+                RaycastHit touchhit;
+
+                if (Physics.Raycast(touchray, out touchhit, Mathf.Infinity, throwMask) && !isThrowDown)
+                {
+                    launchPlaceholder -= launchPowerDecrease;
+                    lapActual = launchPlaceholder;
+                    isThrowDown = true;
+                }
+                if (Input.touches[i].phase == TouchPhase.Ended)
+                {
+                    isThrowDown = false;
+                }
+            }
+        }
+    }
+    //private void SetLaunchByTouch()
+    //{
+    //    if (!IsPointerOverUIObject() && !PauseMenu.gameIsPaused)
+    //    {
+    //        for (int i = 0; i < Input.touchCount; i++)
+    //        {
+    //            Ray touchray = Camera.main.ScreenPointToRay(Input.touches[i].position);
+    //            RaycastHit touchhit;
+
+    //            if (Physics.Raycast(touchray, out touchhit, Mathf.Infinity, throwMask) && !bustedShootMeter)
+    //            {
+    //                isThrowDown = true;
+    //                launchPlaceholder += Time.deltaTime * angleRatio;
+    //                lapActual = launchPlaceholder;
+
+    //                if (launchPlaceholder >= 1)
+    //                {
+    //                    bustedShootMeter = true;
+    //                    launchPlaceholder = 0;
+    //                    lapActual = 0;
+
+    //                }
+    //            }
+    //            if (Input.touches[i].phase == TouchPhase.Ended)
+    //            {
+    //                isThrowDown = false;
+    //            }
+    //        }
+    //    }
+    //}
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
+    }
+
+}

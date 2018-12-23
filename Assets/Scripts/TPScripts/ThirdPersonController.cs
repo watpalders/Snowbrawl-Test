@@ -8,7 +8,7 @@ public class ThirdPersonController : MonoBehaviour
 
     Vector3 velocity;
     Rigidbody myRigidbody;
-    Camera viewCamera;
+    Camera viewCamera; 
     ThirdPersonController controller;
     TPGunController gunController;
     public float launchAngle;

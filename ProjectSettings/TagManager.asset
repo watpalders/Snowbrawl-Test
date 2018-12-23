@@ -7,6 +7,12 @@ TagManager:
   - snowball
   - Enemy
   - EnemySnowball
+  - GameSpot
+  - MoveToGameOBJ
+  - ActivePlayer
+  - BuildSnowBank
+  - SoftGround
+  - Joystick
   layers:
   - Default
   - TransparentFX
@@ -18,11 +24,11 @@ TagManager:
   - 
   - PostProcessing
   - ClickableObjects
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Interactive
+  - Terrain
+  - MoveSpots
+  - ThrowableArea
+  - MovingZones
   - 
   - 
   - 

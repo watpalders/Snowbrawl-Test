@@ -31,10 +31,10 @@ public class Player : MonoBehaviour
             LookAtMouse();
             // weapon input
             SetMuzzlePower();
-            if (Input.GetMouseButtonUp(0))
-            {
-                gunController.Shoot();
-            }
+            //if (Input.GetMouseButtonUp(0))
+            //{
+            //    gunController.Shoot();
+            //}
 
         }
         else
