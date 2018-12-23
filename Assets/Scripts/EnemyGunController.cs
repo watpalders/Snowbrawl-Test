@@ -28,7 +28,6 @@ public class EnemyGunController : MonoBehaviour
             EquipGun(startingGun);
         }
         GetEnemyPos(); // get from Target File
-        print(enemyPosition); // yay
         rb = GetComponent<Rigidbody>();
         Launch();
         GameObject light = (GameObject)Instantiate(clickLight, new Vector3(enemyPosition.x, 5 + enemyPosition.y, enemyPosition.z), Quaternion.Euler(90f, 0f, 0f));

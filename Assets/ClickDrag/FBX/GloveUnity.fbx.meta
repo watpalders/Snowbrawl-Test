@@ -1,0 +1,135 @@
+fileFormatVersion: 2
+guid: a5cc4b7e653b28f4a88bcd0098cbd7fd
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Glove.L
+    100002: Glove.R
+    100004: GloveClosed.L
+    100006: GloveClosed.R
+    100008: GloveOrigina.L
+    100010: GloveOrigina.R
+    100012: //RootNode
+    400000: Glove.L
+    400002: Glove.R
+    400004: GloveClosed.L
+    400006: GloveClosed.R
+    400008: GloveOrigina.L
+    400010: GloveOrigina.R
+    400012: //RootNode
+    2100000: Material
+    2300000: Glove.L
+    2300002: Glove.R
+    2300004: GloveClosed.L
+    2300006: GloveClosed.R
+    2300008: GloveOrigina.L
+    2300010: GloveOrigina.R
+    3300000: Glove.L
+    3300002: Glove.R
+    3300004: GloveClosed.L
+    3300006: GloveClosed.R
+    3300008: GloveOrigina.L
+    3300010: GloveOrigina.R
+    4300000: GloveClosed.L
+    4300002: Glove.L
+    4300004: GloveOrigina.L
+    4300006: Glove.R
+    4300008: GloveClosed.R
+    4300010: GloveOrigina.R
+    6400000: Glove.L
+    6400002: Glove.R
+    6400004: GloveClosed.L
+    6400006: GloveClosed.R
+    6400008: GloveOrigina.L
+    6400010: GloveOrigina.R
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 03d27da8b23af4b44bf8fdb9652e4fc0, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.2
+    meshCompression: 0
+    addColliders: 1
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
